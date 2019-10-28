@@ -1,1 +1,0 @@
-print("HELLo worldjælkj")
