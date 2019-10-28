@@ -10,7 +10,6 @@ class Item:
         self.__category = category
 
     def __str__(self):
-        print()
         return "Name: {}, Category: {}".format(self.__name, self.__category)
 
 
@@ -20,10 +19,15 @@ class Catalog:
         self.__collection = collection
 
     def add(self, item):
-        self.__collection.append(str(item))
+        self.__collection.append(str(item).split(", "))
 
     def remove(self, item):
+        for n, i in enumerate(self.__collection):
+            self.__collection[n] = ", ".join(i)
         self.__collection.remove(str(item))
+        for n, i in enumerate(self.__collection):
+            self.__collection[n] = self.__collection[n].split(", ")
+
 
     def set_name(self, name = ""):
         self.__name = name
@@ -31,11 +35,14 @@ class Catalog:
     def clear(self):
         self.__collection = ""
 
-    #def find_item_by_name(self, name):
-
+    def find_item_by_name(self, name):
+        for i in self.__collection:
+            nafn = i[0]
+            if name == nafn[6:]:
+                return ", ".join(i)
 
     def __str__(self):
-        return "Catalog {}: {}".format(self.__name, self.__collection)
+        return "Catalog {}: \n {}".format(self.__name, self.__collection)
 
 
 
@@ -64,8 +71,8 @@ print(catalog)
 catalog.set_name("Favorite Movies")
 print(catalog)
 
-#print(catalog.find_item_by_name("Green Book"))
-#print(catalog.find_item_by_name("The Godfather"))
+print(catalog.find_item_by_name("Green Book"))
+print(catalog.find_item_by_name("The Godfather"))
 
 catalog.clear()
 print(catalog)
